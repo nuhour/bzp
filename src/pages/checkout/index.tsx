@@ -1,7 +1,7 @@
 import Taro, { useDidShow } from '@tarojs/taro'
 import { Button, Input, Text, Textarea, View } from '@tarojs/components'
 import { useEffect, useState } from 'react'
-import type { FulfillmentType, BzpFulfillmentSlot, BzpOrderPreview, BzpStore } from '@/types'
+import type { FulfillmentType, BzpCartItem, BzpFulfillmentSlot, BzpOrderPreview, BzpStore } from '@/types'
 import { checkoutStore, type BzpCheckoutState } from '@/store/checkout'
 import { slotStore } from '@/store/slot'
 import { orderStore } from '@/store/order'
@@ -14,6 +14,8 @@ import { AppNavBar } from '@/components/ui/AppNavBar'
 import { SlotPicker } from '@/components/order/SlotPicker'
 import { PriceText } from '@/components/ui/PriceText'
 import './index.scss'
+
+type CheckoutLineItem = Pick<BzpCartItem, 'productId' | 'quantity' | 'flavorId' | 'specId'>
 
 export default function CheckoutPage() {
   const [checkout, setCheckout] = useState<BzpCheckoutState>(checkoutStore.get())
@@ -45,8 +47,8 @@ export default function CheckoutPage() {
     }
   })
 
-  const selectedItems = checkout.source === 'buyNow' && checkout.productId
-    ? [{ productId: checkout.productId, quantity: checkout.quantity || 1 }]
+  const selectedItems: CheckoutLineItem[] = checkout.source === 'buyNow' && checkout.productId
+    ? [{ productId: checkout.productId, quantity: checkout.quantity || 1, flavorId: checkout.flavorId, specId: checkout.specId }]
     : cartStore.getSelectedItems()
   const productAmount = selectedItems.reduce((total, item) => {
     const product = catalogStore.findProduct(item.productId)

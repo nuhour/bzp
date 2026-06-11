@@ -9,6 +9,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "types": ["@tarojs/taro", "node", "react"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]

@@ -12,6 +12,16 @@ import { ProductCard } from '@/components/product/ProductCard'
 import { openShopContact } from '@/utils/service'
 import './index.scss'
 
+const tabBarPages = new Set(['/pages/home/index', '/pages/category/index', '/pages/cart/index', '/pages/mine/index'])
+
+function openBzpPage(url: string) {
+  if (tabBarPages.has(url)) {
+    Taro.switchTab({ url })
+    return
+  }
+  Taro.navigateTo({ url })
+}
+
 export default function HomePage() {
   const [home, setHome] = useState<BzpHomePayload>(catalogStore.getHome() || demoHome)
   const profile = userStore.getProfile()
@@ -27,29 +37,29 @@ export default function HomePage() {
   }
 
   return (
-    <View className="bzp-page home-page">
+    <View className="bzp-page bzp-home-page">
       <AppNavBar title="包子铺" />
-      <View className="home-member">
+      <View className="bzp-home-member">
         <View>
-          <Text className="home-member__hello">{profile?.nickname || '你好，包子铺客人'}</Text>
-          <View className="home-member__stats">
+          <Text className="bzp-home-member__hello">{profile?.nickname || '你好，包子铺客人'}</Text>
+          <View className="bzp-home-member__stats">
             <Text>积分 {profile?.asset.points ?? 1280}</Text>
             <Text>余额 ¥{(profile?.asset.balance ?? 86).toFixed(2)}</Text>
           </View>
         </View>
-        <Button className="home-member__login" onClick={() => userStore.requireLogin('请先登录包子铺')}>登录</Button>
+        <Button className="bzp-home-member__login" onClick={() => userStore.requireLogin('请先登录包子铺')}>登录</Button>
       </View>
 
-      <View className="home-hero" onClick={() => Taro.navigateTo({ url: '/pages/category/index' })}>
-        <Image className="home-hero__image" src={home.banners[0]?.image || home.products[0]?.cover} mode="aspectFill" />
-        <View className="home-hero__content">
-          <Text className="home-hero__tag">今日现蒸</Text>
-          <Text className="home-hero__title">{home.banners[0]?.title || '明早热乎档'}</Text>
-          <Text className="home-hero__subtitle">{home.banners[0]?.subtitle || '预定下单，预约到店或配送'}</Text>
+      <View className="bzp-home-hero" onClick={() => openBzpPage('/pages/category/index')}>
+        <Image className="bzp-home-hero__image" src={home.banners[0]?.image || home.products[0]?.cover} mode="aspectFill" />
+        <View className="bzp-home-hero__content">
+          <Text className="bzp-home-hero__tag">今日现蒸</Text>
+          <Text className="bzp-home-hero__title">{home.banners[0]?.title || '明早热乎档'}</Text>
+          <Text className="bzp-home-hero__subtitle">{home.banners[0]?.subtitle || '预定下单，预约到店或配送'}</Text>
         </View>
       </View>
 
-      <View className="home-grid">
+      <View className="bzp-home-grid">
         {[
           ['鲜肉包', '/pages/category/index'],
           ['素菜包', '/pages/category/index'],
@@ -60,8 +70,8 @@ export default function HomePage() {
           ['门店', '/pages/checkout/index'],
           ['客服', 'service']
         ].map(([label, url]) => (
-          <View key={label} className="home-grid__item" onClick={() => url === 'service' ? openShopContact() : Taro.navigateTo({ url })}>
-            <Text className="home-grid__icon">✦</Text>
+          <View key={label} className="bzp-home-grid__item" onClick={() => url === 'service' ? openShopContact() : openBzpPage(url)}>
+            <Text className="bzp-home-grid__icon">✦</Text>
             <Text>{label}</Text>
           </View>
         ))}
@@ -69,11 +79,11 @@ export default function HomePage() {
 
       <View className="bzp-section-title">
         <Text>今日特惠</Text>
-        <Text className="home-more" onClick={() => Taro.navigateTo({ url: '/pages/category/index' })}>查看全部</Text>
+        <Text className="bzp-home-more" onClick={() => openBzpPage('/pages/category/index')}>查看全部</Text>
       </View>
-      <ScrollView className="home-specials" scrollX>
+      <ScrollView className="bzp-home-specials" scrollX>
         {home.recommendedProducts.map((product) => (
-          <View key={product.id} className="home-specials__item">
+          <View key={product.id} className="bzp-home-specials__item">
             <ProductCard product={product} onAdd={addProduct} />
           </View>
         ))}

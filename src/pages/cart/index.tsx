@@ -36,7 +36,7 @@ export default function CartPage() {
   }
 
   return (
-    <View className="bzp-page cart-page">
+    <View className="bzp-page bzp-cart-page">
       <AppNavBar title="购物车" />
       {!items.length ? <EmptyState title="购物车还是空的" description="先去挑几样热乎包子吧" /> : null}
       {items.map((item) => {
@@ -44,9 +44,9 @@ export default function CartPage() {
         if (!product) return null
         const invalid = !product.isActive || product.stock <= 0 || item.quantity > product.stock
         return (
-          <View key={`${item.productId}-${item.flavorId}-${item.specId}`} className={`cart-item ${invalid ? 'cart-item--invalid' : ''}`}>
+          <View key={`${item.productId}-${item.flavorId}-${item.specId}`} className={`bzp-cart-item ${invalid ? 'bzp-cart-item--invalid' : ''}`}>
             <View
-              className={`cart-item__check ${item.selected ? 'cart-item__check--active' : ''}`}
+              className={`bzp-cart-item__check ${item.selected ? 'bzp-cart-item__check--active' : ''}`}
               onClick={() => {
                 if (invalid && !item.selected) {
                   Taro.showToast({ title: product.stock <= 0 ? '商品已售罄' : '库存不足', icon: 'none' })
@@ -55,13 +55,13 @@ export default function CartPage() {
                 cartStore.toggle(item.productId, item.flavorId, item.specId).then(reload)
               }}
             />
-            <Image className="cart-item__image" src={product.cover} mode="aspectFill" />
-            <View className="cart-item__body">
-              <Text className="cart-item__name">{product.name}</Text>
-              <Text className="cart-item__sub">{invalid ? (product.stock <= 0 ? '已售罄，请移除后重新选择' : `库存仅剩 ${product.stock} 件`) : product.subtitle}</Text>
-              <View className="cart-item__foot">
+            <Image className="bzp-cart-item__image" src={product.cover} mode="aspectFill" />
+            <View className="bzp-cart-item__body">
+              <Text className="bzp-cart-item__name">{product.name}</Text>
+              <Text className="bzp-cart-item__sub">{invalid ? (product.stock <= 0 ? '已售罄，请移除后重新选择' : `库存仅剩 ${product.stock} 件`) : product.subtitle}</Text>
+              <View className="bzp-cart-item__foot">
                 <PriceText value={product.price} size="small" />
-                <View className="cart-item__stepper">
+                <View className="bzp-cart-item__stepper">
                   <Button onClick={() => cartStore.setQuantity(item.productId, item.quantity - 1, item.flavorId, item.specId).then(reload).catch((error) => Taro.showToast({ title: error instanceof Error ? error.message : '调整失败', icon: 'none' }))}>-</Button>
                   <Text>{item.quantity}</Text>
                   <Button disabled={item.quantity >= product.stock} onClick={() => cartStore.setQuantity(item.productId, item.quantity + 1, item.flavorId, item.specId).then(reload).catch((error) => Taro.showToast({ title: error instanceof Error ? error.message : '调整失败', icon: 'none' }))}>+</Button>
@@ -71,12 +71,12 @@ export default function CartPage() {
           </View>
         )
       })}
-      <View className="cart-bar">
+      <View className="bzp-cart-bar">
         <View>
-          <Text className="cart-bar__label">合计</Text>
+          <Text className="bzp-cart-bar__label">合计</Text>
           <PriceText value={cartStore.getSelectedTotal()} />
         </View>
-        <Button className="cart-bar__button" disabled={!canCheckout} onClick={checkout}>去预约</Button>
+        <Button className="bzp-cart-bar__button" disabled={!canCheckout} onClick={checkout}>去预约</Button>
       </View>
     </View>
   )

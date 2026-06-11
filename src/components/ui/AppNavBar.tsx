@@ -47,15 +47,15 @@ export function AppNavBar({ title, back = false, rightText, onRight }: Props) {
   }
 
   return (
-    <View className="app-nav" style={style}>
+    <View className="bzp-app-nav" style={style}>
       {back ? (
-        <View className="app-nav__back" style={backStyle} onClick={() => Taro.navigateBack()}>
-          <Text className="app-nav__icon">‹</Text>
+        <View className="bzp-app-nav__back" style={backStyle} onClick={() => Taro.navigateBack()}>
+          <Text className="bzp-app-nav__icon">‹</Text>
         </View>
       ) : null}
-      <Text className="app-nav__title">{title}</Text>
+      <Text className="bzp-app-nav__title">{title}</Text>
       {rightText ? (
-        <View className="app-nav__right" onClick={onRight}>
+        <View className="bzp-app-nav__right" onClick={onRight}>
           <Text>{rightText}</Text>
         </View>
       ) : null}
