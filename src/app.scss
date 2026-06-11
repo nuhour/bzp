@@ -1,0 +1,47 @@
+$bzp-bg: #fff7ea;
+$bzp-primary: #f08a24;
+$bzp-accent: #b93a2b;
+$bzp-wood: #b77a3a;
+$bzp-green: #3f8f52;
+$bzp-text: #3e2415;
+
+page {
+  min-height: 100%;
+  background: $bzp-bg;
+  color: $bzp-text;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  line-height: 1;
+}
+
+button::after {
+  border: 0;
+}
+
+.bzp-page {
+  min-height: 100vh;
+  padding-bottom: 40px;
+  background: linear-gradient(180deg, #fff1d8 0%, #fff7ea 38%, #fffaf2 100%);
+}
+
+.bzp-card {
+  border-radius: 28px;
+  background: #fffaf2;
+  box-shadow: 0 16px 36px rgba(177, 96, 32, 0.12);
+}
+
+.bzp-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 18px 14px;
+  color: #1b1c1a;
+  font-size: 22px;
+  font-weight: 700;
+}

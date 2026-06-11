@@ -1,0 +1,125 @@
+.bzp-product-card {
+  overflow: hidden;
+  border: 1px solid rgba(133, 116, 98, 0.18);
+  border-radius: 20px;
+  background: #fffaf2;
+  box-shadow: 0 10px 24px rgba(177, 96, 32, 0.1);
+}
+
+.bzp-product-card__media {
+  position: relative;
+  height: 150px;
+  background: #fff1d8;
+}
+
+.bzp-product-card__image {
+  width: 100%;
+  height: 100%;
+}
+
+.bzp-product-card__tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 9px;
+  border-radius: 8px;
+  background: #f08a24;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.bzp-product-card__sold-out {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 5px 9px;
+  border-radius: 8px;
+  background: rgba(27, 28, 26, 0.72);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.bzp-product-card__body {
+  padding: 13px;
+}
+
+.bzp-product-card__name {
+  display: block;
+  color: #3e2415;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 22px;
+}
+
+.bzp-product-card__subtitle {
+  display: block;
+  min-height: 20px;
+  margin-top: 4px;
+  color: #7a5a42;
+  font-size: 13px;
+}
+
+.bzp-product-card__batch-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.bzp-product-card__batch,
+.bzp-product-card__steam {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.bzp-product-card__batch {
+  background: rgba(240, 138, 36, 0.13);
+  color: #b93a2b;
+}
+
+.bzp-product-card__steam {
+  background: rgba(63, 143, 82, 0.13);
+  color: #3f8f52;
+}
+
+.bzp-product-card__window {
+  display: block;
+  margin-top: 6px;
+  color: #b77a3a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.bzp-product-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.bzp-product-card__add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f08a24;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.bzp-product-card--sold-out {
+  opacity: 0.72;
+}
+
+.bzp-product-card--sold-out .bzp-product-card__add {
+  width: 48px;
+  background: #c8c1b6;
+  font-size: 12px;
+}
