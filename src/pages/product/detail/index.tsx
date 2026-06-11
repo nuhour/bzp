@@ -27,7 +27,7 @@ export default function ProductDetailPage() {
     })
   }, [id])
 
-  if (!product) return <View className="bzp-page detail-page" />
+  if (!product) return <View className="bzp-page bzp-detail-page" />
   const soldOut = !product.isActive || product.stock <= 0
 
   const buyNow = () => {
@@ -49,58 +49,58 @@ export default function ProductDetailPage() {
   }
 
   return (
-    <View className="bzp-page detail-page">
+    <View className="bzp-page bzp-detail-page">
       <AppNavBar title="商品详情" back />
-      <View className="detail-hero">
-        <Image className="detail-hero__image" src={product.cover} mode="aspectFill" />
+      <View className="bzp-detail-hero">
+        <Image className="bzp-detail-hero__image" src={product.cover} mode="aspectFill" />
       </View>
-      <View className="detail-panel">
-        <View className="detail-head">
-          <Text className="detail-title">{product.name}</Text>
+      <View className="bzp-detail-panel">
+        <View className="bzp-detail-head">
+          <Text className="bzp-detail-title">{product.name}</Text>
           <PriceText value={product.price} original={product.originalPrice} />
         </View>
-        <Text className="detail-subtitle">{product.subtitle}</Text>
-        <View className="detail-batch">
-          {product.batchLabel && <Text className="detail-batch__label">{product.batchLabel}</Text>}
-          {product.steamTag && <Text className="detail-batch__steam">{product.steamTag}</Text>}
-          {product.serveWindow && <Text className="detail-batch__window">{product.serveWindow}</Text>}
+        <Text className="bzp-detail-subtitle">{product.subtitle}</Text>
+        <View className="bzp-detail-batch">
+          {product.batchLabel && <Text className="bzp-detail-batch__label">{product.batchLabel}</Text>}
+          {product.steamTag && <Text className="bzp-detail-batch__steam">{product.steamTag}</Text>}
+          {product.serveWindow && <Text className="bzp-detail-batch__window">{product.serveWindow}</Text>}
         </View>
-        <Text className={soldOut ? 'detail-stock detail-stock--warn' : 'detail-stock'}>{soldOut ? '已售罄' : `库存 ${product.stock} 件`}</Text>
-        <Text className="detail-desc">每日小批量制作，支持预约到店自提和预约配送。建议提前选择时段，下单后门店按预约时间备货。</Text>
+        <Text className={soldOut ? 'bzp-detail-stock bzp-detail-stock--warn' : 'bzp-detail-stock'}>{soldOut ? '已售罄' : `库存 ${product.stock} 件`}</Text>
+        <Text className="bzp-detail-desc">每日小批量制作，支持预约到店自提和预约配送。建议提前选择时段，下单后门店按预约时间备货。</Text>
 
-        <Text className="detail-label">口味</Text>
-        <View className="detail-options">
+        <Text className="bzp-detail-label">口味</Text>
+        <View className="bzp-detail-options">
           {product.flavors.map((item) => (
-            <Text key={item.id} className={`detail-chip ${flavorId === item.id ? 'detail-chip--active' : ''}`} onClick={() => setFlavorId(item.id)}>{item.name}</Text>
+            <Text key={item.id} className={`bzp-detail-chip ${flavorId === item.id ? 'bzp-detail-chip--active' : ''}`} onClick={() => setFlavorId(item.id)}>{item.name}</Text>
           ))}
         </View>
 
-        <Text className="detail-label">规格</Text>
-        <View className="detail-options">
+        <Text className="bzp-detail-label">规格</Text>
+        <View className="bzp-detail-options">
           {product.specs.map((item) => (
-            <Text key={item.id} className={`detail-chip ${specId === item.id ? 'detail-chip--active' : ''}`} onClick={() => setSpecId(item.id)}>{item.name}</Text>
+            <Text key={item.id} className={`bzp-detail-chip ${specId === item.id ? 'bzp-detail-chip--active' : ''}`} onClick={() => setSpecId(item.id)}>{item.name}</Text>
           ))}
         </View>
 
-        <View className="detail-quantity">
-          <Text className="detail-label">数量</Text>
-          <View className="detail-stepper">
+        <View className="bzp-detail-quantity">
+          <Text className="bzp-detail-label">数量</Text>
+          <View className="bzp-detail-stepper">
             <Button onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</Button>
             <Text>{quantity}</Text>
             <Button disabled={quantity >= product.stock} onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}>+</Button>
           </View>
         </View>
 
-        <View className="detail-note">
-          <Text className="detail-note__title">热乎出笼提醒</Text>
-          <Text className="detail-note__body">门店按预约档期现包鲜蒸，建议在出笼窗口内到店或等待配送，热乎口感更好。</Text>
+        <View className="bzp-detail-note">
+          <Text className="bzp-detail-note__title">热乎出笼提醒</Text>
+          <Text className="bzp-detail-note__body">门店按预约档期现包鲜蒸，建议在出笼窗口内到店或等待配送，热乎口感更好。</Text>
         </View>
       </View>
-      <View className="detail-bar">
-        <Button className="detail-bar__ghost" onClick={openShopContact}>客服</Button>
-        <Button className="detail-bar__ghost">收藏</Button>
-        <Button className="detail-bar__cart" disabled={soldOut} onClick={addToCart}>加入购物车</Button>
-        <Button className="detail-bar__buy" disabled={soldOut} onClick={buyNow}>立即购买</Button>
+      <View className="bzp-detail-bar">
+        <Button className="bzp-detail-bar__ghost" onClick={openShopContact}>客服</Button>
+        <Button className="bzp-detail-bar__ghost">收藏</Button>
+        <Button className="bzp-detail-bar__cart" disabled={soldOut} onClick={addToCart}>加入购物车</Button>
+        <Button className="bzp-detail-bar__buy" disabled={soldOut} onClick={buyNow}>立即购买</Button>
       </View>
     </View>
   )

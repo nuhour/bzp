@@ -50,20 +50,20 @@ export default function OrderListPage() {
   }
 
   return (
-    <View className="bzp-page order-list-page">
+    <View className="bzp-page bzp-order-list-page">
       <AppNavBar title="我的订单" back />
-      <View className="order-tabs">
+      <View className="bzp-order-tabs">
         {tabs.map((tab) => (
           <Text
             key={tab.label}
-            className={`order-tabs__item ${active === tab.value ? 'order-tabs__item--active' : ''}`}
+            className={`bzp-order-tabs__item ${active === tab.value ? 'bzp-order-tabs__item--active' : ''}`}
             onClick={() => {
               setActive(tab.value)
               reload(tab.value)
             }}
           >
             {tab.label}
-            {tab.value && counts[tab.value] ? <Text className="order-tabs__badge">{counts[tab.value]}</Text> : null}
+            {tab.value && counts[tab.value] ? <Text className="bzp-order-tabs__badge">{counts[tab.value]}</Text> : null}
           </Text>
         ))}
       </View>

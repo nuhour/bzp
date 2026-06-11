@@ -10,10 +10,10 @@ interface Props {
 export function PriceText({ value, original, size = 'normal' }: Props) {
   const showOriginal = typeof original === 'number' && original > value
   return (
-    <View className={`price-text price-text--${size}`}>
-      <Text className="price-text__symbol">¥</Text>
-      <Text className="price-text__value">{value.toLocaleString()}</Text>
-      {showOriginal ? <Text className="price-text__original">¥{original?.toLocaleString()}</Text> : null}
+    <View className={`bzp-price-text bzp-price-text--${size}`}>
+      <Text className="bzp-price-text__symbol">¥</Text>
+      <Text className="bzp-price-text__value">{value.toLocaleString()}</Text>
+      {showOriginal ? <Text className="bzp-price-text__original">¥{original?.toLocaleString()}</Text> : null}
     </View>
   )
 }

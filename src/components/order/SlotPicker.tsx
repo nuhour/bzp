@@ -10,15 +10,15 @@ interface Props {
 
 export function SlotPicker({ slots, selectedId, onSelect }: Props) {
   return (
-    <View className="slot-picker">
+    <View className="bzp-slot-picker">
       {slots.map((slot) => (
         <View
           key={slot.id}
-          className={`slot-picker__item ${selectedId === slot.id ? 'slot-picker__item--active' : ''}`}
+          className={`bzp-slot-picker__item ${selectedId === slot.id ? 'bzp-slot-picker__item--active' : ''}`}
           onClick={() => onSelect(slot.id)}
         >
-          <Text className="slot-picker__time">{slot.startTime}-{slot.endTime}</Text>
-          <Text className="slot-picker__capacity">余 {slot.availableCapacity}</Text>
+          <Text className="bzp-slot-picker__time">{slot.startTime}-{slot.endTime}</Text>
+          <Text className="bzp-slot-picker__capacity">余 {slot.availableCapacity}</Text>
         </View>
       ))}
     </View>

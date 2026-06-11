@@ -132,13 +132,13 @@ export default function CheckoutPage() {
   }
 
   return (
-    <View className="bzp-page checkout-page">
+    <View className="bzp-page bzp-checkout-page">
       <AppNavBar title="预约结算" back />
-      <View className="checkout-card">
-        <Text className="checkout-title">履约方式</Text>
-        <View className="checkout-segment">
+      <View className="bzp-checkout-card">
+        <Text className="bzp-checkout-title">履约方式</Text>
+        <View className="bzp-checkout-segment">
           {(['pickup', 'delivery'] as FulfillmentType[]).map((type) => (
-            <Text key={type} className={`checkout-segment__item ${checkout.fulfillmentType === type ? 'checkout-segment__item--active' : ''}`} onClick={() => sync({ fulfillmentType: type, slotId: undefined })}>
+            <Text key={type} className={`bzp-checkout-segment__item ${checkout.fulfillmentType === type ? 'bzp-checkout-segment__item--active' : ''}`} onClick={() => sync({ fulfillmentType: type, slotId: undefined })}>
               {type === 'pickup' ? '到店自提' : '预约配送'}
             </Text>
           ))}
@@ -146,56 +146,56 @@ export default function CheckoutPage() {
       </View>
 
       {checkout.fulfillmentType === 'pickup' ? (
-        <View className="checkout-card">
-          <Text className="checkout-title">自提门店</Text>
+        <View className="bzp-checkout-card">
+          <Text className="bzp-checkout-title">自提门店</Text>
           {stores.map((store) => (
-            <View key={store.id} className={`checkout-store ${checkout.storeId === store.id ? 'checkout-store--active' : ''}`} onClick={() => sync({ storeId: store.id, slotId: undefined })}>
-              <Text className="checkout-store__name">{store.name}</Text>
-              <Text className="checkout-store__addr">{store.address} · {store.businessHours}</Text>
+            <View key={store.id} className={`bzp-checkout-store ${checkout.storeId === store.id ? 'bzp-checkout-store--active' : ''}`} onClick={() => sync({ storeId: store.id, slotId: undefined })}>
+              <Text className="bzp-checkout-store__name">{store.name}</Text>
+              <Text className="bzp-checkout-store__addr">{store.address} · {store.businessHours}</Text>
             </View>
           ))}
-          <View className="checkout-inputs">
+          <View className="bzp-checkout-inputs">
             <Input placeholder="取货人姓名" value={checkout.pickupContactName || ''} onInput={(event) => sync({ pickupContactName: String(event.detail.value || '') })} />
             <Input placeholder="取货人手机号" value={checkout.pickupContactPhone || ''} onInput={(event) => sync({ pickupContactPhone: String(event.detail.value || '') })} />
           </View>
         </View>
       ) : (
-        <View className="checkout-card">
-          <Text className="checkout-title">配送信息</Text>
+        <View className="bzp-checkout-card">
+          <Text className="bzp-checkout-title">配送信息</Text>
           {!addresses.length ? (
-            <View className="checkout-address-empty" onClick={() => Taro.navigateTo({ url: '/pages/address/list/index' })}>
+            <View className="bzp-checkout-address-empty" onClick={() => Taro.navigateTo({ url: '/pages/address/list/index' })}>
               <Text>还没有配送地址</Text>
               <Text>去添加 ›</Text>
             </View>
           ) : addresses.map((address) => (
             <View
               key={address.id}
-              className={`checkout-store ${checkout.addressId === address.id ? 'checkout-store--active' : ''}`}
+              className={`bzp-checkout-store ${checkout.addressId === address.id ? 'bzp-checkout-store--active' : ''}`}
               onClick={() => sync({ addressId: address.id })}
             >
-              <Text className="checkout-store__name">{address.name} {address.phone}</Text>
-              <Text className="checkout-store__addr">{address.region} · {address.detail}</Text>
+              <Text className="bzp-checkout-store__name">{address.name} {address.phone}</Text>
+              <Text className="bzp-checkout-store__addr">{address.region} · {address.detail}</Text>
             </View>
           ))}
-          <Text className="checkout-address-manage" onClick={() => Taro.navigateTo({ url: '/pages/address/list/index' })}>管理配送地址 ›</Text>
+          <Text className="bzp-checkout-address-manage" onClick={() => Taro.navigateTo({ url: '/pages/address/list/index' })}>管理配送地址 ›</Text>
         </View>
       )}
 
-      <View className="checkout-card">
-        <Text className="checkout-title">预约时段</Text>
+      <View className="bzp-checkout-card">
+        <Text className="bzp-checkout-title">预约时段</Text>
         <SlotPicker slots={slots} selectedId={checkout.slotId} onSelect={(slotId) => sync({ slotId })} />
       </View>
 
-      <View className="checkout-card">
-        <Text className="checkout-title">订单商品</Text>
+      <View className="bzp-checkout-card">
+        <Text className="bzp-checkout-title">订单商品</Text>
         {selectedItems.map((item) => {
           const product = catalogStore.findProduct(item.productId)
           if (!product) return null
           return (
-            <View key={item.productId} className="checkout-product">
-              <View className="checkout-product__main">
+            <View key={item.productId} className="bzp-checkout-product">
+              <View className="bzp-checkout-product__main">
                 <Text>{product.name} x{item.quantity}</Text>
-                <View className="checkout-product__batch">
+                <View className="bzp-checkout-product__batch">
                   {product.batchLabel && <Text>{product.batchLabel}</Text>}
                   {product.serveWindow && <Text>{product.serveWindow}</Text>}
                   {product.steamTag && <Text>{product.steamTag}</Text>}
@@ -207,28 +207,28 @@ export default function CheckoutPage() {
         })}
       </View>
 
-      <View className="checkout-card">
-        <View className="checkout-line"><Text>商品小计</Text><PriceText value={displayProductAmount} size="small" /></View>
-        <View className="checkout-line"><Text>配送费</Text><PriceText value={displayDeliveryAmount} size="small" /></View>
+      <View className="bzp-checkout-card">
+        <View className="bzp-checkout-line"><Text>商品小计</Text><PriceText value={displayProductAmount} size="small" /></View>
+        <View className="bzp-checkout-line"><Text>配送费</Text><PriceText value={displayDeliveryAmount} size="small" /></View>
         {displayCouponAmount > 0 ? (
-          <View className="checkout-line"><Text>优惠抵扣</Text><PriceText value={-displayCouponAmount} size="small" /></View>
+          <View className="bzp-checkout-line"><Text>优惠抵扣</Text><PriceText value={-displayCouponAmount} size="small" /></View>
         ) : null}
         {displayPointsAmount > 0 ? (
-          <View className="checkout-line"><Text>积分抵扣</Text><PriceText value={-displayPointsAmount} size="small" /></View>
+          <View className="bzp-checkout-line"><Text>积分抵扣</Text><PriceText value={-displayPointsAmount} size="small" /></View>
         ) : null}
-        <View className="checkout-line checkout-line--switch" onClick={() => sync({ usePoints: !checkout.usePoints })}>
-          <Text>使用积分抵扣</Text><Text className={checkout.usePoints ? 'checkout-switch checkout-switch--on' : 'checkout-switch'}>{checkout.usePoints ? '已启用' : '未启用'}</Text>
+        <View className="bzp-checkout-line bzp-checkout-line--switch" onClick={() => sync({ usePoints: !checkout.usePoints })}>
+          <Text>使用积分抵扣</Text><Text className={checkout.usePoints ? 'bzp-checkout-switch bzp-checkout-switch--on' : 'bzp-checkout-switch'}>{checkout.usePoints ? '已启用' : '未启用'}</Text>
         </View>
-        {previewError ? <Text className="checkout-error">{previewError}</Text> : null}
-        <Textarea className="checkout-message" placeholder="给门店留言，例如少油、分袋包装" value={checkout.message} onInput={(event) => sync({ message: String(event.detail.value || '') })} />
+        {previewError ? <Text className="bzp-checkout-error">{previewError}</Text> : null}
+        <Textarea className="bzp-checkout-message" placeholder="给门店留言，例如少油、分袋包装" value={checkout.message} onInput={(event) => sync({ message: String(event.detail.value || '') })} />
       </View>
 
-      <View className="checkout-bar">
+      <View className="bzp-checkout-bar">
         <View>
-          <Text className="checkout-bar__label">应付</Text>
+          <Text className="bzp-checkout-bar__label">应付</Text>
           <PriceText value={total} size="large" />
         </View>
-        <Button className="checkout-bar__button" onClick={submit}>提交订单</Button>
+        <Button className="bzp-checkout-bar__button" onClick={submit}>提交订单</Button>
       </View>
     </View>
   )

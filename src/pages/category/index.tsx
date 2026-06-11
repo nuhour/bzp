@@ -28,9 +28,9 @@ export default function CategoryPage() {
   })
 
   return (
-    <View className="bzp-page category-page">
+    <View className="bzp-page bzp-category-page">
       <AppNavBar title="包子铺" />
-      <View className="category-search">
+      <View className="bzp-category-search">
         <Input
           value={keyword}
           placeholder="搜索鲜肉包、豆浆、小菜..."
@@ -41,11 +41,11 @@ export default function CategoryPage() {
           }}
         />
       </View>
-      <View className="category-tabs">
+      <View className="bzp-category-tabs">
         {categories.map((category) => (
           <Text
             key={category.id}
-            className={`category-tabs__item ${active === category.id ? 'category-tabs__item--active' : ''}`}
+            className={`bzp-category-tabs__item ${active === category.id ? 'bzp-category-tabs__item--active' : ''}`}
             onClick={() => {
               setActive(category.id)
               reload(category.id)
@@ -55,8 +55,8 @@ export default function CategoryPage() {
           </Text>
         ))}
       </View>
-      <View className="category-title">{categories.find((item) => item.id === active)?.name || '全部商品'}</View>
-      <View className="category-products">
+      <View className="bzp-category-title">{categories.find((item) => item.id === active)?.name || '全部商品'}</View>
+      <View className="bzp-category-products">
         {products.map((product) => (
           <ProductCard
             key={product.id}

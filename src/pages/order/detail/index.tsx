@@ -47,19 +47,19 @@ export default function OrderDetailPage() {
   const actions = getDetailBarActions(order)
 
   return (
-    <View className="bzp-page order-detail-page">
+    <View className="bzp-page bzp-order-detail-page">
       <AppNavBar title="订单详情" back />
-      <View className="order-detail-status">
-        <Text className="order-detail-status__title">{detail.title}</Text>
-        <Text className="order-detail-status__desc">{detail.desc}</Text>
-        <Text className="order-detail-status__slot">
+      <View className="bzp-order-detail-status">
+        <Text className="bzp-order-detail-status__title">{detail.title}</Text>
+        <Text className="bzp-order-detail-status__desc">{detail.desc}</Text>
+        <Text className="bzp-order-detail-status__slot">
           {order.fulfillmentType === 'pickup' ? '预约到店' : '预约配送'} · {order.appointmentDate} {order.appointmentStartTime}-{order.appointmentEndTime}
         </Text>
-        {order.fulfillmentType === 'pickup' ? <Text className="order-detail-status__code">{order.pickupCode || '支付后生成取货码'}</Text> : null}
+        {order.fulfillmentType === 'pickup' ? <Text className="bzp-order-detail-status__code">{order.pickupCode || '支付后生成取货码'}</Text> : null}
       </View>
 
-      <View className="order-detail-card">
-        <Text className="order-detail-title">订单商品</Text>
+      <View className="bzp-order-detail-card">
+        <Text className="bzp-order-detail-title">订单商品</Text>
         {order.items.map((item) => {
           const product = catalogStore.findProduct(item.productId) || item.product
           const batchTags = [
@@ -68,11 +68,11 @@ export default function OrderDetailPage() {
             item.steamTag || product?.steamTag
           ].filter((tag): tag is string => Boolean(tag))
           return (
-            <View key={item.productId} className="order-detail-product">
-              <View className="order-detail-product__main">
+            <View key={item.productId} className="bzp-order-detail-product">
+              <View className="bzp-order-detail-product__main">
                 <Text>{product?.name || item.productId} x{item.quantity}</Text>
                 {batchTags.length ? (
-                  <View className="order-detail-product__batch">
+                  <View className="bzp-order-detail-product__batch">
                     {batchTags.map((tag) => <Text key={tag}>{tag}</Text>)}
                   </View>
                 ) : null}
@@ -83,27 +83,27 @@ export default function OrderDetailPage() {
         })}
       </View>
 
-      <View className="order-detail-card">
-        <Text className="order-detail-title">费用明细</Text>
-        <View className="order-detail-line"><Text>商品金额</Text><PriceText value={order.productAmount} size="small" /></View>
-        <View className="order-detail-line"><Text>配送费</Text><PriceText value={order.deliveryAmount} size="small" /></View>
-        <View className="order-detail-line"><Text>积分抵扣</Text><PriceText value={-order.pointsAmount} size="small" /></View>
-        <View className="order-detail-total"><Text>实付</Text><PriceText value={order.payableAmount} /></View>
+      <View className="bzp-order-detail-card">
+        <Text className="bzp-order-detail-title">费用明细</Text>
+        <View className="bzp-order-detail-line"><Text>商品金额</Text><PriceText value={order.productAmount} size="small" /></View>
+        <View className="bzp-order-detail-line"><Text>配送费</Text><PriceText value={order.deliveryAmount} size="small" /></View>
+        <View className="bzp-order-detail-line"><Text>积分抵扣</Text><PriceText value={-order.pointsAmount} size="small" /></View>
+        <View className="bzp-order-detail-total"><Text>实付</Text><PriceText value={order.payableAmount} /></View>
       </View>
 
-      <View className="order-detail-card">
-        <Text className="order-detail-title">订单信息</Text>
-        <Text className="order-detail-info">订单号：{order.orderNo}</Text>
-        <Text className="order-detail-info">下单时间：{order.createdAt}</Text>
-        <Text className="order-detail-info">留言：{order.message || '无'}</Text>
+      <View className="bzp-order-detail-card">
+        <Text className="bzp-order-detail-title">订单信息</Text>
+        <Text className="bzp-order-detail-info">订单号：{order.orderNo}</Text>
+        <Text className="bzp-order-detail-info">下单时间：{order.createdAt}</Text>
+        <Text className="bzp-order-detail-info">留言：{order.message || '无'}</Text>
       </View>
 
       {actions.length ? (
-        <View className="order-detail-bar">
+        <View className="bzp-order-detail-bar">
           {actions.map((action) => (
             <Button
               key={action.id}
-              className={action.primary ? 'order-detail-bar__primary' : 'order-detail-bar__ghost'}
+              className={action.primary ? 'bzp-order-detail-bar__primary' : 'bzp-order-detail-bar__ghost'}
               onClick={() => handleAction(action.id)}
             >
               {action.label}

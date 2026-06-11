@@ -39,39 +39,39 @@ export default function MinePage() {
   }
 
   return (
-    <View className="bzp-page mine-page">
+    <View className="bzp-page bzp-mine-page">
       <AppNavBar title="我的" />
-      <View className="mine-card">
+      <View className="bzp-mine-card">
         <View>
-          <Text className="mine-name">{profile?.nickname || '包子铺会员'}</Text>
-          <Text className="mine-level">{profile?.level || '暖麦会员'}</Text>
+          <Text className="bzp-mine-name">{profile?.nickname || '包子铺会员'}</Text>
+          <Text className="bzp-mine-level">{profile?.level || '暖麦会员'}</Text>
         </View>
-        <Button className="mine-login" onClick={profile ? logout : login}>{profile ? '退出' : '登录'}</Button>
+        <Button className="bzp-mine-login" onClick={profile ? logout : login}>{profile ? '退出' : '登录'}</Button>
       </View>
-      <View className="mine-assets">
-        <View><Text className="mine-assets__value">¥{asset.balance.toFixed(2)}</Text><Text>余额</Text></View>
-        <View><Text className="mine-assets__value">{asset.couponCount}</Text><Text>优惠券</Text></View>
-        <View><Text className="mine-assets__value">{asset.points}</Text><Text>积分</Text></View>
+      <View className="bzp-mine-assets">
+        <View><Text className="bzp-mine-assets__value">¥{asset.balance.toFixed(2)}</Text><Text>余额</Text></View>
+        <View><Text className="bzp-mine-assets__value">{asset.couponCount}</Text><Text>优惠券</Text></View>
+        <View><Text className="bzp-mine-assets__value">{asset.points}</Text><Text>积分</Text></View>
       </View>
-      <View className="mine-section">
-        <View className="mine-section__head">
+      <View className="bzp-mine-section">
+        <View className="bzp-mine-section__head">
           <Text>我的订单</Text>
           <Text onClick={() => Taro.navigateTo({ url: '/pages/order/list/index' })}>全部订单 ›</Text>
         </View>
-        <View className="mine-order-grid">
+        <View className="bzp-mine-order-grid">
           {statusGroupForMine.map((item) => (
             <View
               key={item.value}
-              className="mine-order-grid__item"
+              className="bzp-mine-order-grid__item"
               onClick={() => Taro.navigateTo({ url: `/pages/order/list/index?status=${item.value}` })}
             >
-              {orderCounts[item.value] ? <Text className="mine-order-grid__badge">{orderCounts[item.value]}</Text> : null}
+              {orderCounts[item.value] ? <Text className="bzp-mine-order-grid__badge">{orderCounts[item.value]}</Text> : null}
               <Text>{item.label}</Text>
             </View>
           ))}
         </View>
       </View>
-      <View className="mine-menu">
+      <View className="bzp-mine-menu">
         {[
           ['收货地址', '/pages/address/list/index'],
           ['我的收藏', '/pages/mine/index'],
@@ -80,7 +80,7 @@ export default function MinePage() {
           ['联系客服', 'service'],
           ['隐私协议', '/pages/mine/index']
         ].map(([label, url]) => (
-          <View key={label} className="mine-menu__item" onClick={() => url === 'service' ? openShopContact() : Taro.navigateTo({ url })}>
+          <View key={label} className="bzp-mine-menu__item" onClick={() => url === 'service' ? openShopContact() : Taro.navigateTo({ url })}>
             <Text>{label}</Text>
             <Text>›</Text>
           </View>

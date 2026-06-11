@@ -1,4 +1,4 @@
-.empty-state {
+.bzp-empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,19 +7,19 @@
   color: #999999;
 }
 
-.empty-state__icon {
+.bzp-empty-state__icon {
   color: #d7c3ae;
   font-size: 46px;
 }
 
-.empty-state__title {
+.bzp-empty-state__title {
   margin-top: 10px;
   color: #524534;
   font-size: 17px;
   font-weight: 700;
 }
 
-.empty-state__desc {
+.bzp-empty-state__desc {
   margin-top: 6px;
   font-size: 13px;
 }
