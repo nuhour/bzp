@@ -38,6 +38,18 @@ export default function MinePage() {
     Taro.showToast({ title: '已退出', icon: 'success' })
   }
 
+  const openMenuItem = (url: string) => {
+    if (url === 'service') {
+      openShopContact()
+      return
+    }
+    if (url === '/pages/mine/index') {
+      Taro.switchTab({ url })
+      return
+    }
+    Taro.navigateTo({ url })
+  }
+
   return (
     <View className="bzp-page bzp-mine-page">
       <AppNavBar title="我的" />
@@ -80,7 +92,7 @@ export default function MinePage() {
           ['联系客服', 'service'],
           ['隐私协议', '/pages/mine/index']
         ].map(([label, url]) => (
-          <View key={label} className="bzp-mine-menu__item" onClick={() => url === 'service' ? openShopContact() : Taro.navigateTo({ url })}>
+          <View key={label} className="bzp-mine-menu__item" onClick={() => openMenuItem(url)}>
             <Text>{label}</Text>
             <Text>›</Text>
           </View>
